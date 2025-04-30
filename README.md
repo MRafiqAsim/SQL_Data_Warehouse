@@ -1,2 +1,2 @@
 # SQL_Data_Warehouse
-A modern SQL Data Warehouse.
+A modern Data Warehouse with SQL Server, ETL Processes, Data Modeling, and Analytics.
