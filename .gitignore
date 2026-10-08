@@ -1,0 +1,6 @@
+*.csv
+.DS_Store
+# Re-include docs (a global gitignore may exclude these)
+!README.md
+!docs/
+!docs/*.md

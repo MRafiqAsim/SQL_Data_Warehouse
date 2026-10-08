@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build warehouse and run data-quality checks
+    runs-on: ubuntu-latest
+    services:
+      sqlserver:
+        image: mcr.microsoft.com/mssql/server:2022-latest
+        env:
+          ACCEPT_EULA: "Y"
+          MSSQL_SA_PASSWORD: ${{ secrets.MSSQL_SA_PASSWORD || 'Ci_Only_Pa55word!' }}
+        ports:
+          - 1433:1433
+    steps:
+      - uses: actions/checkout@v7
+      - name: Build Bronze, Silver and Gold, then run the checks
+        env:
+          CONTAINER: ${{ job.services.sqlserver.id }}
+          MSSQL_SA_PASSWORD: ${{ secrets.MSSQL_SA_PASSWORD || 'Ci_Only_Pa55word!' }}
+        run: ./ci/build_and_test.sh
