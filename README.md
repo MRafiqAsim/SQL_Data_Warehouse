@@ -6,12 +6,7 @@ A sales data warehouse on **Microsoft SQL Server**, built with the **medallion a
 
 ## Architecture
 
-```
-CRM (CSV) ─┐                                                   ┌─► reporting / BI
-           ├─► BRONZE ──────────► SILVER ───────────► GOLD ────┤
-ERP (CSV) ─┘    raw, as-is          cleaned,            star     └─► ad-hoc SQL analysis
-                (BULK INSERT)       standardised        schema
-```
+![Architecture: CRM and ERP sources flowing through Bronze, Silver and Gold layers](assets/architecture.png)
 
 | Layer | Purpose | Load |
 |---|---|---|
